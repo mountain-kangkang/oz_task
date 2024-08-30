@@ -1,0 +1,40 @@
+*{
+    font-family: "Nanum Pen Script", cursive, monospace;
+}
+
+html{
+    background-color: whitesmoke;
+    font-size: 16px;
+}
+
+body{
+    width: 570px;
+    margin: auto;
+}
+
+h1{
+    font-size: 43px;
+    text-align: center;
+}
+
+h2{
+    font-size: 34px;
+}
+
+img{
+    width: 570px;
+    height: 300px;
+    border-radius: 20px;
+}
+
+p{
+    font-size: 1.5rem;
+}
+
+#introduce{
+    text-align: center;
+}
+
+#fun-fact{
+    text-align: left;
+}

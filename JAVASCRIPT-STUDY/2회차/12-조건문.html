@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>조건문 만들기</title>
+</head>
+<body>
+    
+    <h1>
+
+    </h1>
+    <p></p>
+    <script>
+        const h1 = document.querySelector('h1')
+        const p = document.querySelector('p')
+
+        const isThere = confirm("버스에 탑승하시겠습니까?")
+
+        if(isThere){
+            h1.textContent = "교통카드를 태그하여 주십시오"
+        }
+
+        const age = parseInt(prompt("나이가 어떻게 되십니까?"))
+        if(age >= 20){
+            p.textContent = "1500원입니다."
+        }
+        else if(age >= 8){
+            p.textContent = "학생 850원입니다."
+        }
+        else{
+            p.textContent = "무료입니다."
+        }
+
+    </script>
+</body>
+</html>

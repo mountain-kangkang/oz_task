@@ -34,7 +34,7 @@ form.addEventListener("submit", function(event){
     document.write(`<p>아이디 : ${userId}</p>`)
     document.write(`<p>이름 : ${userName}</p>`)
     document.write(`<p>전화번호 : ${userPhone}</p>`)
-    document.write(`<p>전화번호 : ${userEmail}</p>`)
+    document.write(`<p>E-mail : ${userEmail}</p>`)
     document.write('<button type="button" class="btn" title="돌아가기" onclick="location.href=`index.html`">돌아가기</button>')
 })
 

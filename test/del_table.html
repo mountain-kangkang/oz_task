@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for delete table</title>
+</head>
+<body>
+    <main>
+        <section id="calculator">
+            <div id="calculator_addBtn">
+                <button id="add_menu">메뉴추가</button>
+                <button id="add_person">인원추가</button>
+            </div>
+      
+            <div>
+                <form>
+                    <table id="calculator_table" style="border:1">
+                        <thead>
+                            <tr>
+                                <th>🍞</th>
+                                <th>메뉴명</th>
+                                <th>금액</th>
+                            <th>
+                                <input type="text" name="person" placeholder="사람 이름">
+                                <button class="td_delete" onclick="td_delete_event(this)">-</button>
+                            </th>
+                            <th>
+                                <input type="text" name="person" placeholder="사람 이름">
+                                <button class="td_delete" onclick="td_delete_event(this)">-</button>
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="tr_delete" onclick="tr_delete_event(this)">메뉴 삭제</button></td>
+                                <td><input type="text" name="menu" placeholder="메뉴명"></td>
+                                <td><input type="text" name="price" placeholder="금액"></td>
+                                <td><input type="checkbox" name="check"></td>
+                                <td><input type="checkbox" name="check"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- 출처: https://oliviakim.tistory.com/84 [ONE LIFE 2 LIVE:티스토리] -->
+     <script>
+        document.getElementById('add_menu').addEventListener('click', () => {
+            // table 변수는 다른 함수에서도 사용되므로 실제 코드에서는 최상단에 선언해 사용했다.
+            const table = document.getElementById('calculator_table');
+            const new_row = table.insertRow();              // 테이블 열 추가
+            const cell_length = table.rows[1].cells.length;
+
+            for(let i = 0; i < cell_length; i++) {
+                const new_cell = new_row.insertCell(i);
+                let temp_html = ``;
+                if(i === 0) {
+                        temp_html = `<td><button class="tr_delete" onclick="tr_delete_event(this)">메뉴 삭제</button></td>`;
+                } else if(i === 1) {
+                        temp_html = `<td><input type="text" name="menu" placeholder="메뉴명"></td>`;
+                } else if(i === 2) {
+                        temp_html = `<td><input type="text" name="price" placeholder="금액"></td>`;
+                } else {
+                        temp_html = `<td><input type="checkbox" name="check"></td>`;
+                };
+                new_cell.insertAdjacentHTML('afterbegin', temp_html);
+            }
+        });
+    <!-- 출처: https://oliviakim.tistory.com/84 [ONE LIFE 2 LIVE:티스토리] -->
+     </script>
+</body>
+</html>

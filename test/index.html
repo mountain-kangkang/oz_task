@@ -67,27 +67,27 @@
     </nav>
     <h2>신규 등록 상품</h2>
     <form class="row g-3">
-      <select class="form-select" aria-label="Default select example" style="width: auto; height: 38px;">
-        <option selected>카테고리</option>
-        <option value="1">상의</option>
-        <option value="2">하의</option>
-        <option value="3">신발</option>
-        <option value="4">패션잡화</option>
+      <select class="form-select" aria-label="Default select example" id="inlineFormSelectPref" style="width: auto; height: 38px;">
+        <option selected="카테고리">카테고리</option>
+        <option value="상의">상의</option>
+        <option value="하의">하의</option>
+        <option value="신발">신발</option>
+        <option value="패션잡화">패션잡화</option>
       </select>
       <select class="form-select" aria-label="Default select example" style="width: auto; height: 38px; margin-left: 7px;">
-        <option selected>성별</option>
-        <option value="1">남성</option>
-        <option value="2">여성</option>
+        <option selected="성별">성별</option>
+        <option value="남성">남성</option>
+        <option value="여성">여성</option>
       </select>
       <div class="col-auto">
-        <label for="inputPassword2" class="visually-hidden">Product search bar</label>
-        <input type="text" class="form-control" id="inputPassword2" placeholder="제품명을 입력해주세요">
+        <label for="search" class="visually-hidden">Product search bar</label>
+        <input type="text" class="form-control" id="search" placeholder="제품명을 입력해주세요">
       </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">조회</button>
+      <div class="col-auto" id="searchBtn">
+        <button type="button" class="btn btn-primary mb-3">조회</button>
       </div>
     </form>
-    <table class="table">
+    <table class="table" id="data-table">
       <thead>
         <tr>
           <th scope="col">카테고리</th>
@@ -96,31 +96,7 @@
           <th scope="col">가격</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td scope="row">상의</td>
-          <td>Supreme</td>
-          <td>Supreme Box logo hooded-T</td>
-          <td>390,000</td>
-        </tr>
-        <tr>
-          <td scope="row">하의</td>
-          <td>DIESEL</td>
-          <td>Diesel Track Pants</td>
-          <td>188,000</td>
-        </tr>
-        <tr>
-          <td scope="row">신발</td>
-          <td>Nike</td>
-          <td>AirForce 1</td>
-          <td>137,000</td>
-        </tr>
-        <tr>
-          <td scope="row">패션잡화</td>
-          <td>Music&Goods</td>
-          <td>빵빵이 키링</td>
-          <td>29,000</td>
-        </tr>
+      <tbody id="data-table">
       </tbody>
     </table>
     <nav aria-label="Page navigation example">
@@ -159,6 +135,78 @@
       }
       clock();
       setInterval(clock, 1000); // 1초마다 실행
+
+      // 크롤링한 데이터를 아래와 같은 형태의 객체 배열로 가정합니다.
+      // 추후 데이터베이스에 있는 데이터를 쿼리문으로 불러 올 수 있게 쿼리를 작성해 볼 수 있음
+      const data = [
+          { category: "상의", brand: 'Supreme', product: 'Supreme Box logo hooded-T', price: '390,000' },
+          { category: "하의", brand: 'DIESEL', product: 'Diesel Track Pants', price: '188,000' },
+          { category: "신발", brand: 'Nike', product: 'AirForce 1', price: '137,000' },
+          { category: "패션잡화", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+      ];
+      
+      const dataTable = document.getElementById('data-table');
+      
+      // 초기화
+      data.forEach((item) => {
+          const row = dataTable.insertRow();
+          row.insertCell(0).innerHTML = item.category;
+          row.insertCell(1).innerHTML = item.brand;
+          row.insertCell(2).innerHTML = item.product;
+          row.insertCell(3).innerHTML = item.price;
+      });
+
+      //카테고리 정렬 
+      let category=document.querySelector("#inlineFormSelectPref")
+      category.addEventListener('change', function() {
+        const selectedValue = category.value;
+        const dataTable = document.getElementById('data-table');
+        //모두 제거후
+        let count=dataTable.rows.length
+        while(0<count){
+          dataTable.deleteRow(count-1)
+          count-=1
+        }
+          
+        // 다시생성
+        data.forEach((item) => {
+          if(item.category==selectedValue || selectedValue=="카테고리"){
+            console.log("dd")
+            const row = dataTable.insertRow();
+            row.insertCell(0).innerHTML = item.category;
+            row.insertCell(1).innerHTML = item.brand;
+            row.insertCell(2).innerHTML = item.product;
+            row.insertCell(3).innerHTML = item.price;
+          }
+        });
+      });
+
+      //검색창 조회
+      let search = document.querySelector("#searchBtn")
+      let searchData = document.querySelector("#search")
+      search.addEventListener('click', function() {
+        const selectedValue = category.value;
+        const dataTable = document.getElementById('data-table');
+        //모두 제거후
+        let count=dataTable.rows.length
+        while(0<count){
+            dataTable.deleteRow(count-1)
+            count-=1
+        }
+
+        //다시 생성
+        data.forEach((item) => {
+          if((item.category==selectedValue || selectedValue=="카테고리") && item.product.includes(searchData.value)){
+            console.log("dd")
+            const row = dataTable.insertRow();
+            row.insertCell(0).innerHTML = item.category;
+            row.insertCell(1).innerHTML = item.brand;
+            row.insertCell(2).innerHTML = item.product;
+            row.insertCell(3).innerHTML = item.price;
+          }
+        });
+      })
+
     </script>
     <!-- 아래는 dark mode 용 bootstrap에서 제공한 script -->
     <script src="darkMode.js"></script>
